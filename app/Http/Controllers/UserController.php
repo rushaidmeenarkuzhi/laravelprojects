@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -72,23 +73,37 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-            'user_name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],            
+            'user_name' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
             'user_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-            
+
         ]);
 
         $user = User::find($id);
 
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
 
-        
-        if($request->hasFile('user_image')){
+        if ($request->hasFile('user_image')) {
+            if ($user->user_image) {
+                Storage::delete('images/' . $user->user_image);
+            }
+
             $fileName = time() . '.' . $request->user_image->extension();
 
             $request->user_image->move(public_path('images'), $fileName);
-             
+
             $user->update(['user_image'=>$fileName]);
         }
-      
+
+
+        // if($request->hasFile('user_image')){
+        //     $fileName = time() . '.' . $request->user_image->extension();
+
+        //     $request->user_image->move(public_path('images'), $fileName);
+
+        //     $user->update(['user_image'=>$fileName]);
+        // }
+
 
         $user->update([
             'name' => $request->name,
