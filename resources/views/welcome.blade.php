@@ -18,11 +18,11 @@
     <title>Document</title>
 </head>
 <body>
-        <ELCOME class="text-center">ELCOME  TO PROJECT</h3>
+        <h3 class="text-center mt-2">WELCOME  TO PROJECT</h3>
         <div class="card">
-          <h1><a class="btn btn-success text-center"  type="button" href="{{ route('login') }}">Login</a><br></h1> 
-          <h1>
-           <a class="btn btn-info text-center" type="button" href="{{ route('register') }}">Register</a>
+          <h1 class="text-center"><a class="btn btn-success"  type="button" href="{{ route('login') }}">Login</a><br></h1> 
+          <h1  class="text-center">
+           <a class="btn btn-info" type="button" href="{{ route('register') }}">Register</a>
 
           </h1>
         </div>
