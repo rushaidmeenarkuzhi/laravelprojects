@@ -18,7 +18,7 @@
     <title>Document</title>
 </head>
 <body>
-        <h3 class="text-center"ELCOME  TO PROJECT</h3>
+        <ELCOME class="text-center">ELCOME  TO PROJECT</h3>
         <div class="card">
           <h1><a class="btn btn-success text-center"  type="button" href="{{ route('login') }}">Login</a><br></h1> 
           <h1>
